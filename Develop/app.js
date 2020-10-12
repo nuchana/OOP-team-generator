@@ -1,3 +1,4 @@
+const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -12,7 +13,68 @@ const render = require("./lib/htmlRenderer");
 
 
 // Write code to use inquirer to gather information about the development team members,
+function promptUser() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "What is your name?",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "What is your id?",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "What is your e-mail?",
+            name: "e-mail"
+        },
+        {
+            type: "input",
+            message: "What is your role?",
+            name: "role"
+            validate: function (answer) {
+                if (this.role = engineer) {
+                    return console.log("A valid GitHub username is required.")
+                }
+                return true;
+            }
+        },
+
+        {
+            type: "input",
+            message: "What is your github username?",
+            name: "username"
+        },
+        {
+            type: "input",
+            message: "What is your school?",
+            name: "school"
+        },
+        {
+            type: "input",
+            message: "What is your office number?",
+            name: "office number"
+        }
+
+    ]).then(function(answers) {
+        const html = htmlRender(answers);
+
+        return writeFileAsync("engineer.html", html);
+
+    }).then(function() {
+        console.log("Successfully wrote to index.html");
+
+    }).catch(function(err) {
+        console.log(err);
+    });
+        
+
+
+
 // and to create objects for each team member (using the correct classes as blueprints!)
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
