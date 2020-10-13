@@ -10,17 +10,19 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+// create an array of team members to be filled in with their id array.
 const teamMembers = [];
 const idArray = [];
 
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+// Write code to use inquirer to gather information about the development team members by starting from a manager role who will set up the team.
 function appMenu() {
     function createManager() {
+        // use inquirer for prompt question and validating answers with return to ensure valid user input
         inquirer.prompt([
             {
                 type: "input",
+
                 message: "What is your manager's name?",
                 name: "managerName",
                 validate: answer => {
@@ -74,7 +76,7 @@ function appMenu() {
                 }
             },
 
-
+        // call back with user's answers to be push in the team member/id array and create team function to be executed.
         ]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             teamMembers.push(manager);
@@ -84,7 +86,7 @@ function appMenu() {
         });
     }
 
-
+    // Create creatTeam function with inquirer/prompt question to set up a team and identify which member type he/she will be as thier class will be different.
     function createTeam() {
         inquirer.prompt([
 
@@ -98,6 +100,7 @@ function appMenu() {
                     "I don't want to add any more."
                 ]
             }
+        
         ]).then(userChoice => {
             switch (userChoice.memberType) {
                 case "Engineer":
@@ -116,7 +119,7 @@ function appMenu() {
 
 
     }
-
+    // create addEngineer function to be called once user input is Engineer. Engineer class with inherit parent class from employee will be prompt questions.
     function addEngineer() {
         inquirer.prompt([
 
@@ -172,6 +175,7 @@ function appMenu() {
                 }
             }
 
+        // callback with Engineer class to be pushed into teamMember and id arrays
 
         ]).then(answers => {
             const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
@@ -182,7 +186,7 @@ function appMenu() {
         })
 
     }
-
+    // create addIntern function with the similar appraoch to addEngineer function with relevant intern class.
     function addIntern () {
         inquirer.prompt([
 
@@ -248,7 +252,7 @@ function appMenu() {
         })
     }
     
-    // create output directory if the output path doesn't exist
+    // create output directory if the output path doesn't exist. 
     function buildTeam () {
         if (!fs.existsSync(OUTPUT_DIR)) {
             fs.mkdirSync(OUTPUT_DIR)
@@ -256,15 +260,8 @@ function appMenu() {
         fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
     }
 
-
     createManager();
-
-
 }
-
-
-
-
 
 appMenu();
 
