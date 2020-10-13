@@ -15,6 +15,7 @@ const idArray = [];
 
 
 // Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
 function appMenu() {
     function createManager() {
         inquirer.prompt([
@@ -116,11 +117,140 @@ function appMenu() {
 
     }
 
-    // }
+    function addEngineer() {
+        inquirer.prompt([
 
-    // function addEngineer(){ {}
+            {
+                type: "input",
+                message: "What is your engineer's name?",
+                name: "engineerName",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a name.";
+                }
+            },
+            {
+                type: "input",
+                message: "What is your engineer's id?",
+                name: "engineerId",
+                validate: answer => {
+                    const pass = answer.match(
+                        /^[1-9]\d*$/
+                    );
+                    if (pass) {
+                        return true;
+                    }
+                    return "Please enter a positive number greater than zero."
+                }
 
-    // function addIntern () {}
+            },
+            {
+                type: "input",
+                message: "What is your engineer's email?",
+                name: "engineerEmail",
+                validate: answer => {
+                    const pass = answer.match(
+                        /\S+@\S+\.\S+/
+                    );
+                    if (pass) {
+                        return true;
+                    }
+                    return "Please enter a valid e-mail."
+                }
+            },
+            {
+                type: "input",
+                message: "What is your engineer's Github username?",
+                name: "engineerGithub",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a name.";
+                }
+            }
+
+
+        ]).then(answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+            teamMembers.push(engineer);
+            idArray.push(answers.engineerId);
+            createTeam();
+
+        })
+
+
+
+    }
+
+    function addIntern () {
+        inquirer.prompt([
+
+            {
+                type: "input",
+                message: "What is your intern's name?",
+                name: "internName",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a name.";
+                }
+            },
+            {
+                type: "input",
+                message: "What is your intern's id?",
+                name: "internId",
+                validate: answer => {
+                    const pass = answer.match(
+                        /^[1-9]\d*$/
+                    );
+                    if (pass) {
+                        return true;
+                    }
+                    return "Please enter a positive number greater than zero."
+                }
+
+            },
+            {
+                type: "input",
+                message: "What is your intern's email?",
+                name: "internEmail",
+                validate: answer => {
+                    const pass = answer.match(
+                        /\S+@\S+\.\S+/
+                    );
+                    if (pass) {
+                        return true;
+                    }
+                    return "Please enter a valid e-mail."
+                }
+            },
+            {
+                type: "input",
+                message: "What is your intern's school?",
+                name: "internSchool",
+                validate: answer => {
+                    if (answer !== "") {
+                        return true;
+                    }
+                    return "Please enter a name.";
+                }
+            }
+
+
+        ]).then(answers => {
+            const intern = new Intern(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+            teamMembers.push(intern);
+            idArray.push(answers.internId);
+            createTeam();
+
+        })
+
+
+    }
 
     // function buildTeam () {}
 
@@ -139,7 +269,7 @@ appMenu();
 
 
 
-// and to create objects for each team member (using the correct classes as blueprints!)
+
 
 
 // After the user has input all employees desired, call the `render` function (required
