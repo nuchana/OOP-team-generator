@@ -1,4 +1,3 @@
-const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -16,7 +15,7 @@ const idArray = [];
 
 
 // Write code to use inquirer to gather information about the development team members,
-function appMenu () { 
+function appMenu() {
     function createManager() {
         inquirer.prompt([
             {
@@ -47,64 +46,94 @@ function appMenu () {
             },
             {
                 type: "input",
-                message: "What is your e-mail?",
-                name: "e-mail"
+                message: "What is your manager's email?",
+                name: "managerEmail",
+                validate: answer => {
+                    const pass = answer.match(
+                        /\S+@\S+\.\S+/
+                    );
+                    if (pass) {
+                        return true;
+                    }
+                    return "Please enter a valid e-mail."
+                }
             },
             {
                 type: "input",
-                message: "What is your role?",
-                choices: ['Engineer', 'Intern', 'Manager'],
-                name: "role"
-                // validate: function (choices) {
-                //     if (this.choices === engineer) {
-                //         return console.log("A valid GitHub username is required.")
-                //     }
-                //     return true;
-                // }
+                message: "What is your manager's office number?",
+                name: "managerOfficeNumber",
+                validate: answer => {
+                    const pass = answer.match(
+                        /^[1-9]\d*$/
+                    );
+                    if (pass) {
+                        return true;
+                    }
+                    return "Please enter a positive number greater than zero."
+                }
             },
 
-            {
-                type: "input",
-                message: "What is your github username?",
-                name: "username"
-            },
-            {
-                type: "input",
-                message: "What is your school?",
-                name: "school"
-            },
-            {
-                type: "input",
-                message: "What is your office number?",
-                name: "office number"
-            }
 
-        ]).then(function (answers) {
-            const html = htmlRender(answers);
+        ]).then(answers => {
+            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+            teamMembers.push(manager);
+            idArray.push(answers.managerId);
+            createTeam();
 
-            return writeFileAsync("engineer.html", html);
-
-        }).then(function () {
-            console.log("Successfully wrote to index.html");
-
-        }).catch(function (err) {
-            console.log(err);
         });
+    }
+
+
+    function createTeam() {
+        inquirer.prompt([
+
+            {
+                type: "list",
+                name: "memberType",
+                message: "Which type of team member would you like to add?",
+                choices: [
+                    "Engineer",
+                    "Intern",
+                    "I don't want to add any more."
+                ]
+            }
+        ]).then(userChoice => {
+            switch (userChoice.memberType) {
+                case "Engineer":
+                    addEngineer();
+                    break;
+
+                case "Intern":
+                    addIntern();
+                    break;
+
+                default:
+                    buildTeam();
+
+            }
+        });
+
 
     }
 
-    // function createteam(){
-
     // }
 
-    // function addEngineer(){
+    // function addEngineer(){ {}
 
-    // }
+    // function addIntern () {}
+
+    // function buildTeam () {}
 
 
     createManager()
 
+
+
 }
+
+
+
+
 
 appMenu();
 
