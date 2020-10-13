@@ -19,8 +19,8 @@ My app scope is to build a Node CLI that takes in information about employees an
 
 * Please find my example of what my app would look like.
 
-![Employee Summary 1](./Assets/10-OOP-homework-demo-1.png)
-![Employee Summary 2](./Assets/10-OOP-homework-demo-2.png)
+![Employee Summary 1](./Assets/NK-team-demo.png)
+
 
 ## My take on this assignment
 
