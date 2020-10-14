@@ -245,8 +245,6 @@ function appMenu() {
 
         ]).then(answers => {
             const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
-            console.log(answers)
-            console.log(intern)
             teamMembers.push(intern);
             idArray.push(answers.internId);
             createTeam();
