@@ -20,6 +20,7 @@ My app scope is to build a Node CLI that takes in information about employees an
 * Please find my example of what my app would look like.
 
 ![Employee Summary 1](./Assets/NK-team-demo.png)
+![My App Demo](./Assets/OOP.gif)
 
 
 ## My take on this assignment
