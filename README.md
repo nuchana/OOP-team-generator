@@ -4,6 +4,9 @@
 
 My app scope is to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, I need to ensure that all unit tests pass.
 
+## My take on this assignment
+
+This assignment has been very challenging with a lot of new syntax and to grab key ideas of how the back-end development works! Attending office hours does really help to walk me through this assignments step by step and new syntax that I should consider. I also start using more ES6 in my codes. The testing part is very practical to test out each code/function element individually so I understand the whole picture of the back-end development flow. 
 
 ## My appraoch to create the app
 
@@ -23,7 +26,5 @@ My app scope is to build a Node CLI that takes in information about employees an
 ![My App Demo](./Assets/oop-demo.gif)
 
 
-## My take on this assignment
 
-This assignment has been very challenging with a lot of new syntax and to grab key ideas of how the back-end development works! Attending office hours does really help to walk me through this assignments step by step and new syntax that I should consider. I also start using more ES6 in my codes. The testing part is very practical to test out each code/function element individually so I understand the whole picture of the back-end development flow. 
 
